@@ -1,0 +1,23 @@
+config:
+  target: "https://sergiolavao.itch.io/test" # Target
+  enviroments:
+    dev:
+      target: "https://sergiolavao.itch.io/test" # Target
+    qa:
+      target: "https://sergiolavao.itch.io/test" # Target
+  phases:
+    - duration: 120
+      arrivalRate: 2 # Llegan 2 usuarios por segundo
+      rampTo: 400 # Aumentar a 400 usuarios por segundo en un lapso de 2 minutos
+      name: loadTest1
+
+scenarios:
+  - name: "Prueba de carga con usuarios simulados"
+    flow:
+      - get:
+          url: "/"
+    expect:
+      - statusCode: 200
+      - contentType: json
+      - equals:
+        - respMessage: "OK"
